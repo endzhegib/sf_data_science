@@ -15,12 +15,22 @@ def random_predict(number:int=1) -> int:
     """
     
     count = 0
+    min_number = 1 #хранение максимального диапазона числа
+    max_number = 101 #хранение минимального диапазона числа
     
     while True:
         count += 1
-        predict_number = np.random.randint(1, 101) #предполагаемое число
-        if number == predict_number:
+        predict_number = np.random.randint(min_number, max_number) #предполагаемое число
+        
+        if predict_number == number:
             break #выход из цикла, если угадали
+       
+        if predict_number > number and predict_number < max_number:
+            max_number = predict_number #корректировка максимального диапазона
+            
+        if predict_number < number and predict_number > min_number:
+            min_number = predict_number #корректировка минимального диапазона
+            
     return(count)
 
 def score_game(random_predict) ->int:
@@ -47,5 +57,3 @@ def score_game(random_predict) ->int:
 
 if __name__ == '__main__':
     score_game(random_predict)
-    
-score_game(random_predict)
